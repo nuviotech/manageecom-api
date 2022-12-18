@@ -4,10 +4,10 @@ first set the database name and port number in application.properties file
 
 ****************************************************************************
 
-To fetch the all product : GET request  -> localhost:8080/
+* To fetch the all product : GET request  -> localhost:8080/
 
 ******************************************************************************
-Add the product : POST request -> localhost:8080/addProduct give the json data</br>
+* Add the product : POST request -> localhost:8080/addProduct give the json data</br>
 Json data is : 
 {
         "sku":"sku id ",
@@ -28,15 +28,15 @@ Json data is :
     
 ****************************************************************************   
 	
-To search the product : localhost:8080/search/{searchKeyHere}
+* To search the product :GET request -> localhost:8080/search/{searchKeyHere}
 
 *******************************************************************************
 
-If you want the add the product to cart :GET request localhost:8080/addToCart/{product_reference_Id}</br>
-To show the cart : GET request localhost:8080/showCart 
+* If you want the add the product to cart :GET request -> localhost:8080/addToCart/{product_reference_Id}</br>
+* To show the cart : GET request -> localhost:8080/showCart 
 
 *******************************************************************************
-* To place the order : POST request localhost:8080/placeOrder give the json data </br>
+* To place the order : POST request -> localhost:8080/placeOrder give the json data </br>
 Json data is :
 {
     "buyerName": "Amar desai",
