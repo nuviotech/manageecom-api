@@ -1,6 +1,6 @@
 # SellerProductAPI
 
-"first set the database name and port number in application.properties file"
+first set the database name and port number in application.properties file
 
 ****************************************************************************
 
@@ -32,7 +32,7 @@ To search the product : localhost:8080/search/{searchKeyHere}
 
 *******************************************************************************
 
-If you want the add the product to cart :GET request localhost:8080/addToCart/{product_reference_Id}
+If you want the add the product to cart :GET request localhost:8080/addToCart/{product_reference_Id}</br>
 To show the cart : GET request localhost:8080/showCart 
 
 *******************************************************************************
