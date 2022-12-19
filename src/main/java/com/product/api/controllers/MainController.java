@@ -33,7 +33,6 @@ public class MainController {
 	@Autowired
 	StockRepository stockRepository;
 	
-	List<Product2> cart=new ArrayList<>();
 	Random random=new Random();
 	
 	//fetch the all product
@@ -49,10 +48,11 @@ public class MainController {
 	}
 	
 	//search the product by title or brand
-	@GetMapping("/search/{key}")
-	public List<Product2> searchProduct(@PathVariable String key){
+	@GetMapping("/search/{key}/{userId}")
+	public List<Product2> searchProduct(@PathVariable String key,@PathVariable String userId){
+		System.out.println("key "+key+" userId : "+userId);
 		List<Product2> products=new ArrayList<>();
-		for(Product2 p:product2Repository.getLikeProductTitleorBrand(key) ) {
+		for(Product2 p:product2Repository.getLikeProduct(userId,key) ) {
 			Stock s=stockRepository.findBySkuAndUserId(p.getSku(), p.getUserId());
 			p.setQuantity(s.getQuentity());
 			products.add(p);
@@ -75,34 +75,17 @@ public class MainController {
 		}	
 	}
 	
-	//product add to cart
-	@GetMapping("/addToCart/{id}")
-	public String addToCart(@PathVariable String id) {
-		Product2 p=product2Repository.findById(id).get();	
-		if(p==null)
-			return "Product not found. something wrong....";
-		else {
-			cart.add(p);
-			return "Product are added to the cart.";
-		}
-	}
-	
-	//to show the product cart
-	@GetMapping("/showCart")
-	public List<Product2> showCart(){
-		return cart;
-	}
-	
 	//place the order
-	@PostMapping("/placeOrder")
-	public String palceOrder(@RequestBody SalesOrder salesOrder ) {
+	@PostMapping("/placeOrder/{productId}")
+	public String palceOrder(@RequestBody SalesOrder salesOrder ,@PathVariable String productId) {
 		
-		if(cart.size()==0)
-			return "opps, your cart is empty...";
+		
 			try {
 				String invoicenumber=random.nextInt()+"_invoce_2022";
+				Product2 p=product2Repository.findById(productId).get();
+				if(p==null)
+					return "product id is wrong";
 				
-				for(Product2 p:cart) {
 				salesOrder.setChannelOrderId(random.nextInt()+"Y2022");
 				salesOrder.setChannelId(30);
 				salesOrder.setStatus("Pending");
@@ -120,12 +103,11 @@ public class MainController {
 				salesOrderItem.setSoldPrice(p.getMrp());
 				salesOrderItem.setItemPrice(p.getMrp()+"");
 				salesOrderItem.setItemName(p.getTitle());
+				
 				//to save the data in database
 				salesOrderRepository.save(salesOrder);
 				salesOrderItemRepository.save(salesOrderItem);
 				
-				}
-				cart.clear();
 				return "Order are successfully placed.";
 			}catch(Exception e) {
 				e.printStackTrace();
