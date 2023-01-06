@@ -47,7 +47,7 @@ public class MainController {
 		return products;
 	}
 	
-	//search the product by title or brand
+	//search the product by key and user id
 	@GetMapping("/search/{key}/{userId}")
 	public List<Product2> searchProduct(@PathVariable String key,@PathVariable String userId){
 		System.out.println("key "+key+" userId : "+userId);
