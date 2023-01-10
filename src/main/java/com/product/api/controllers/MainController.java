@@ -16,7 +16,7 @@ import com.product.api.Repo.Product2Repository;
 import com.product.api.Repo.SalesOrderItemRepository;
 import com.product.api.Repo.SalesOrderRepository;
 import com.product.api.Repo.StockRepository;
-import com.product.api.entitys.Product2;
+import com.product.api.entitys.Product;
 import com.product.api.entitys.SalesOrder;
 import com.product.api.entitys.SalesOrderItem;
 import com.product.api.entitys.Stock;
@@ -37,9 +37,9 @@ public class MainController {
 	
 	//fetch the all product
 	@GetMapping("/")
-	public List<Product2> allproducts(){
-		List<Product2> products=new ArrayList<>();
-		for(Product2 product:product2Repository.findAll()) {
+	public List<Product> allproducts(){
+		List<Product> products=new ArrayList<>();
+		for(Product product:product2Repository.findAll()) {
 			Stock stock=stockRepository.findBySkuAndUserId(product.getSku(), product.getUserId());
 			product.setQuantity(stock.getQuentity());
 			products.add(product);
@@ -49,10 +49,10 @@ public class MainController {
 	
 	//search the product by key and user id
 	@GetMapping("/search/{key}/{userId}")
-	public List<Product2> searchProduct(@PathVariable String key,@PathVariable String userId){
+	public List<Product> searchProduct(@PathVariable String key,@PathVariable String userId){
 		System.out.println("key "+key+" userId : "+userId);
-		List<Product2> products=new ArrayList<>();
-		for(Product2 p:product2Repository.getLikeProduct(userId,key) ) {
+		List<Product> products=new ArrayList<>();
+		for(Product p:product2Repository.getLikeProduct(userId,key) ) {
 			Stock s=stockRepository.findBySkuAndUserId(p.getSku(), p.getUserId());
 			p.setQuantity(s.getQuentity());
 			products.add(p);
@@ -62,7 +62,7 @@ public class MainController {
 	
 	//add the product
 	@PostMapping(path="/addProduct",consumes = "application/json")
-	public String addNewProduct(@RequestBody Product2 product){
+	public String addNewProduct(@RequestBody Product product){
 		try {
 			product.setProductRefId(random.nextInt()+"_product_2022");
 			product2Repository.save(product);
@@ -82,7 +82,7 @@ public class MainController {
 		
 			try {
 				String invoicenumber=random.nextInt()+"_invoce_2022";
-				Product2 p=product2Repository.findById(productId).get();
+				Product p=product2Repository.findById(productId).get();
 				if(p==null)
 					return "product id is wrong";
 				
