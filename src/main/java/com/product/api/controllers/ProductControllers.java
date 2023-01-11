@@ -74,4 +74,15 @@ public class ProductControllers {
 		String str="["+products.toString()+"]";
 		return str;
 	}
+	
+	//get multiple products by ids
+	@GetMapping("/productsByIds")
+	public String getProductsByIds(@RequestParam("id_in") List<String> ids) {
+		List<Product> products=new ArrayList<>();
+		for(String id:ids) {
+			Product singleProduct=productRepository.findById(id).get();
+			products.add(singleProduct);
+		}
+		return products.toString();
+	}
 }
