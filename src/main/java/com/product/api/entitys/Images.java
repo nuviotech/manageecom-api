@@ -15,7 +15,7 @@ public class Images {
 	String alternativeText;
 	String url;
 	@ManyToOne
-	Product product;
+	Product2 product2;
 	public int getId() {
 		return id;
 	}
@@ -40,11 +40,11 @@ public class Images {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Product getProduct() {
-		return product;
+	public Product2 getProduct() {
+		return product2;
 	}
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProduct(Product2 product2) {
+		this.product2 = product2;
 	}
 	@Override
 	public String toString() {

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
-public class Product {
+public class Product2 {
 	
 	@Column(name="Product_Reference_id")
 	@Id
@@ -45,7 +45,7 @@ public class Product {
 	String slug;//this is sub category
 	Date created_at;
 	Date updated_at;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product2")
 	List<Images> images;
 	
 	@ManyToOne
