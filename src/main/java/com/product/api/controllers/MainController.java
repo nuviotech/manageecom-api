@@ -16,7 +16,7 @@ import com.product.api.Repo.Product2Repository;
 import com.product.api.Repo.SalesOrderItemRepository;
 import com.product.api.Repo.SalesOrderRepository;
 import com.product.api.Repo.StockRepository;
-import com.product.api.entitys.Product;
+import com.product.api.entitys.Product2;
 import com.product.api.entitys.SalesOrder;
 import com.product.api.entitys.SalesOrderItem;
 import com.product.api.entitys.Stock;
@@ -35,43 +35,43 @@ public class MainController {
 	
 	Random random=new Random();
 	
-	//fetch the all product
+	//fetch the all product2
 	@GetMapping("/")
-	public List<Product> allproducts(){
-		List<Product> products=new ArrayList<>();
-		for(Product product:product2Repository.findAll()) {
-			Stock stock=stockRepository.findBySkuAndUserId(product.getSku(), product.getUserId());
-			product.setQuantity(stock.getQuentity());
-			products.add(product);
+	public List<Product2> allproducts(){
+		List<Product2> product2s=new ArrayList<>();
+		for(Product2 product2:product2Repository.findAll()) {
+			Stock stock=stockRepository.findBySkuAndUserId(product2.getSku(), product2.getUserId());
+			product2.setQuantity(stock.getQuentity());
+			product2s.add(product2);
 		}
-		return products;
+		return product2s;
 	}
 	
-	//search the product by key and user id
+	//search the product2 by key and user id
 	@GetMapping("/search/{key}/{userId}")
-	public List<Product> searchProduct(@PathVariable String key,@PathVariable String userId){
+	public List<Product2> searchProduct(@PathVariable String key,@PathVariable String userId){
 		System.out.println("key "+key+" userId : "+userId);
-		List<Product> products=new ArrayList<>();
-		for(Product p:product2Repository.getLikeProduct(userId,key) ) {
+		List<Product2> product2s=new ArrayList<>();
+		for(Product2 p:product2Repository.getLikeProduct(userId,key) ) {
 			Stock s=stockRepository.findBySkuAndUserId(p.getSku(), p.getUserId());
 			p.setQuantity(s.getQuentity());
-			products.add(p);
+			product2s.add(p);
 		}	
-		return products;
+		return product2s;
 	}
 	
-	//add the product
+	//add the product2
 	@PostMapping(path="/addProduct",consumes = "application/json")
-	public String addNewProduct(@RequestBody Product product){
+	public String addNewProduct(@RequestBody Product2 product2){
 		try {
-			product.setProductRefId(random.nextInt()+"_product_2022");
-			product2Repository.save(product);
-			return "Product is save successfully.";
+			product2.setProductRefId(random.nextInt()+"_product_2022");
+			product2Repository.save(product2);
+			return "Product2 is save successfully.";
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("Product not save");
-			return "Product not saved.";
+			System.out.println("Product2 not save");
+			return "Product2 not saved.";
 		}	
 	}
 	
@@ -82,9 +82,9 @@ public class MainController {
 		
 			try {
 				String invoicenumber=random.nextInt()+"_invoce_2022";
-				Product p=product2Repository.findById(productId).get();
+				Product2 p=product2Repository.findById(productId).get();
 				if(p==null)
-					return "product id is wrong";
+					return "product2 id is wrong";
 				
 				salesOrder.setChannelOrderId(random.nextInt()+"Y2022");
 				salesOrder.setChannelId(30);
@@ -97,7 +97,7 @@ public class MainController {
 				
 				SalesOrderItem  salesOrderItem=new SalesOrderItem();
 				salesOrderItem.setSku(p.getSku());
-				salesOrderItem.setQuantity(1);//fetch from product
+				salesOrderItem.setQuantity(1);//fetch from product2
 				salesOrderItem.setSalesOrderId(100);
 				salesOrderItem.setOrderItemStatus("APPROVED");
 				salesOrderItem.setSoldPrice(p.getMrp());

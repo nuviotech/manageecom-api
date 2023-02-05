@@ -25,7 +25,7 @@ public class Stores {
 	Date updated_at;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "store")
-	List<Product> products;
+	List<Product2> product2s;
 
 	public int getId() {
 		return id;
@@ -83,12 +83,12 @@ public class Stores {
 		this.updated_at = updated_at;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public List<Product2> getProducts() {
+		return product2s;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setProducts(List<Product2> product2s) {
+		this.product2s = product2s;
 	}
 
 	@Override
