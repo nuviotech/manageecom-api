@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.product.api.Repo.Product2Repository;
 import com.product.api.entitys.Product2;
 
-@CrossOrigin(origins = "http://localhost:3000/", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:3000/","https://nuvio.in/","https://manageecom.com:8081/","https://manageecom.com:8083/","https://manageecom.com:8084/"}, maxAge = 3600)
 @RestController
 public class ProductControllers {
 	@Autowired
 	Product2Repository productRepository;
 	
 	//get all product2s
-	@GetMapping("product2s")
+	@GetMapping("products")
 	public String getAllProducts(@RequestParam("_limit") int limit){
 		System.out.println("Name : "+limit);
 		Pageable pageble = PageRequest.of(0, limit);
@@ -48,27 +48,27 @@ public class ProductControllers {
 	}
 	
 	//get product2 count
-	@GetMapping("product2s/count")
+	@GetMapping("products/count")
 	public int getProductCount() {
 		return productRepository.findAll().size();
 	}
 	
 	//get the product2 by id
-	@GetMapping("/product2s/{productId}")
+	@GetMapping("products/{productId}")
 	public String getProductById(@PathVariable int productId) {
 		Product2 product2=productRepository.getById(productId+"");
 		return product2.toString();
 	}
 	
 	//get the product2s by categorywise (slug)
-	@GetMapping("/product2-categories")
+	@GetMapping("product-categories")
 	public String getProductBySlug(@RequestParam("slug") String slug) {
 		List<Product2> ptrs=productRepository.findBySlug(slug);
 		return ptrs.toString();
 	}
 	
 	//get the product2 by brand name
-	@GetMapping("/brands")
+	@GetMapping("brands")
 	public String getProductByBrand(@RequestParam ("slug") String slug) {
 		List<Product2> product2s=productRepository.findByBrand(slug);
 		String str="["+product2s.toString()+"]";
@@ -76,7 +76,7 @@ public class ProductControllers {
 	}
 	
 	//get multiple product2s by ids
-	@GetMapping("/productsByIds")
+	@GetMapping("productsByIds")
 	public String getProductsByIds(@RequestParam("id_in") List<String> ids) {
 		List<Product2> product2s=new ArrayList<>();
 		for(String id:ids) {
