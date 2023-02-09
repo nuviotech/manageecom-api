@@ -21,6 +21,7 @@ public class Stores {
 	String slug;//sub name of store
 	String address;
 	String phone;
+	
 	Date created_at;
 	Date updated_at;
 	

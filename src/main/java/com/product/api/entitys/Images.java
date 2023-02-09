@@ -48,7 +48,7 @@ public class Images {
 	}
 	@Override
 	public String toString() {
-		return "{\"id\":" + id + ", \"name\":\"" + name + "\", \"alternativeText\":" + alternativeText + ", \"url\":\"" + url
+		return "{\"id\":" + id + ", \"name\":\"" + name + "\", \"alternativeText\":\"" + alternativeText + "\", \"url\":\"" + url
 				+ "\" }";
 	}
 	
