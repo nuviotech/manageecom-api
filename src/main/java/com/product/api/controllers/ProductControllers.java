@@ -18,7 +18,7 @@ import com.product.api.entitys.Product2;
 
 
 //@CrossOrigin(origins = {"http://localhost:3000/","https://nuvio.in/","https://manageecom.com:8081/","https://manageecom.com:8083/","https://manageecom.com:8084/"}, maxAge = 3600)
-@CrossOrigin(origins = {"http://localhost:3000/","https://nuvio.in/","https://manageecom.com:8001/","https://manageecom.com:8003/","https://manageecom.com:8004/"}, maxAge = 3600)
+//@CrossOrigin(origins = {"http://localhost:3000/","https://nuvio.in/","https://manageecom.com:8001/","https://manageecom.com:8003/","https://manageecom.com:8004/"}, maxAge = 3600)
 @RestController
 public class ProductControllers {
 	@Autowired
