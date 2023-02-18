@@ -41,7 +41,7 @@ public class MainController {
 		List<Product2> product2s=new ArrayList<>();
 		for(Product2 product2:product2Repository.findAll()) {
 			Stock stock=stockRepository.findBySkuAndUserId(product2.getSku(), product2.getUserId());
-			product2.setQuantity(stock.getQuentity());
+			product2.setQuantity(stock.getQuantity());
 			product2s.add(product2);
 		}
 		return product2s;
@@ -54,7 +54,7 @@ public class MainController {
 		List<Product2> product2s=new ArrayList<>();
 		for(Product2 p:product2Repository.getLikeProduct(userId,key) ) {
 			Stock s=stockRepository.findBySkuAndUserId(p.getSku(), p.getUserId());
-			p.setQuantity(s.getQuentity());
+			p.setQuantity(s.getQuantity());
 			product2s.add(p);
 		}	
 		return product2s;
