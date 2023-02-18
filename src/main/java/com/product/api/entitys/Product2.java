@@ -10,7 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Product2 {
@@ -69,6 +72,10 @@ public class Product2 {
 	@Column(name="USER_ID")
 	String userId;
 	
+	
+	@OneToOne(mappedBy = "product")
+	@JsonBackReference
+	Stock stock;
 	
 	
 	public String getProductRefId() {
@@ -277,6 +284,22 @@ public class Product2 {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public Stores getStore() {
+		return store;
+	}
+
+	public void setStore(Stores store) {
+		this.store = store;
+	}
+
+	public Stock getStock() {
+		return stock;
+	}
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
 
 	@Override
