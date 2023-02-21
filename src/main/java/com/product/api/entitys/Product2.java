@@ -22,6 +22,9 @@ public class Product2 {
 	@Id
 	String id;
 	
+	@Column(name="CUD",length = 1)
+	String cud;
+	
 	@Column(name="SKU")
 	String sku;
 	
@@ -39,15 +42,17 @@ public class Product2 {
 	
 	double sale_price;
 	String vendor;
-	int review;
-	boolean is_out_of_stock;
+
+	
 	int depot;
-	int inventory;
-	boolean is_active;
-	boolean is_sale;
+
+	boolean is_active=true;
+
 	String slug;//this is sub category
-	Date created_at;
-	Date updated_at;
+	
+	@Column(name="CREATED_DT_TIME")
+	Date createdDtTime;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product2")
 	List<Images> images;
 	
@@ -198,22 +203,6 @@ public class Product2 {
 		this.vendor = vendor;
 	}
 
-	public int getReview() {
-		return review;
-	}
-
-	public void setReview(int review) {
-		this.review = review;
-	}
-
-	public boolean isIs_out_of_stock() {
-		return is_out_of_stock;
-	}
-
-	public void setIs_out_of_stock(boolean is_out_of_stock) {
-		this.is_out_of_stock = is_out_of_stock;
-	}
-
 	public int getDepot() {
 		return depot;
 	}
@@ -222,13 +211,7 @@ public class Product2 {
 		this.depot = depot;
 	}
 
-	public int getInventory() {
-		return inventory;
-	}
-
-	public void setInventory(int inventory) {
-		this.inventory = inventory;
-	}
+	
 
 	public boolean isIs_active() {
 		return is_active;
@@ -238,13 +221,7 @@ public class Product2 {
 		this.is_active = is_active;
 	}
 
-	public boolean isIs_sale() {
-		return is_sale;
-	}
-
-	public void setIs_sale(boolean is_sale) {
-		this.is_sale = is_sale;
-	}
+	
 
 	public String getSlug() {
 		return slug;
@@ -254,21 +231,7 @@ public class Product2 {
 		this.slug = slug;
 	}
 
-	public Date getCreated_at() {
-		return created_at;
-	}
-
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
-	}
-
-	public Date getUpdated_at() {
-		return updated_at;
-	}
-
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
-	}
+	
 
 	public List<Images> getImages() {
 		return images;
@@ -301,14 +264,27 @@ public class Product2 {
 	public void setStock(Stock stock) {
 		this.stock = stock;
 	}
+	
+	public String getCud() {
+		return cud;
+	}
+
+	public void setCud(String cud) {
+		this.cud = cud;
+	}
+
+	public Date getCreatedDtTime() {
+		return createdDtTime;
+	}
+
+	public void setCreatedDtTime(Date createdDtTime) {
+		this.createdDtTime = createdDtTime;
+	}
 
 	@Override
 	public String toString() {
 		return "{\"id\":" + id + ", \"sku\":\"" + sku + "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":"
-				+ is_featured + ", \"is_hot\":" + is_hot + ", \"sale_price\":" + sale_price + ", \"vendor\":\"" + vendor + "\", \"review\":"
-				+ review + ", \"is_out_of_stock\":" + is_out_of_stock + ", \"depot\":" + depot + ", \"inventory\":" + inventory
-				+ ", \"is_active\":" + is_active + ", \"is_sale\":" + is_sale + ", \"slug\":\"" + slug + "\", \"created_at\":" + created_at
-				+ ", \"updated_at\":" + updated_at + ", \"images\":" + images + ", \"store\":[" + store + "], \"price\":" + price
+				+ is_featured + ", \"is_hot\":" + is_hot + ", \"sale_price\":" + sale_price + ", \"vendor\":\"" + vendor + "\", \"depot\":" + depot + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"store\":[" + store + "], \"price\":" + price
 				+ ", \"material\":\"" + material + "\", \"brand\":\"" + brand + "\", \"color\":\"" + color + "\", \"description\":\"" + description
 				+ "\"}";
 	}
