@@ -42,7 +42,8 @@ public class Product2 {
 	
 	double sale_price;
 	String vendor;
-
+	
+	int categoryId;
 	
 	int depot;
 
@@ -279,6 +280,14 @@ public class Product2 {
 
 	public void setCreatedDtTime(Date createdDtTime) {
 		this.createdDtTime = createdDtTime;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	@Override
