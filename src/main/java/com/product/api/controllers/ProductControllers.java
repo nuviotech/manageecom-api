@@ -1,5 +1,6 @@
 package com.product.api.controllers;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.product.api.Repo.Product2Repository;
+import com.product.api.entitys.Images;
 import com.product.api.entitys.Product2;
+import com.product.api.service.ImageManager;
 
 @CrossOrigin(origins = {"http://localhost:3000/","https://nuvio.in/","https://manageecom.com:8081/","https://manageecom.com:8083/","https://manageecom.com:8084/"}, maxAge = 3600)
 @RestController
 public class ProductControllers {
 	@Autowired
 	Product2Repository productRepository;
+	@Autowired
+	ImageManager imageManager;
 	
 	//get all product2s
 	@GetMapping("products")
@@ -30,7 +35,8 @@ public class ProductControllers {
 		List<Product2> ptrs=new ArrayList<>();
 		Page<Product2> page=productRepository.findAll(pageble);
 		for(Product2 p:page) {
-			ptrs.add(p);
+			p.setImages(imageManager.setTheImages(p));
+			ptrs.add(p);	
 		}
 		return ptrs.toString();
 	}
@@ -42,6 +48,7 @@ public class ProductControllers {
 		List<Product2> ptrs=new ArrayList<>();
 		Page<Product2> page=productRepository.findAll(pageble);
 		for(Product2 p:page) {
+			p.setImages(imageManager.setTheImages(p));
 			ptrs.add(p);
 		}
 		return ptrs.toString();
@@ -57,21 +64,30 @@ public class ProductControllers {
 	@GetMapping("products/{productId}")
 	public String getProductById(@PathVariable int productId) {
 		Product2 product2=productRepository.getById(productId+"");
+		product2.setImages(imageManager.setTheImages(product2));
 		return product2.toString();
 	}
 	
 	//get the product2s by categorywise (slug)
 	@GetMapping("product-categories")
 	public String getProductBySlug(@RequestParam("slug") String slug) {
-		List<Product2> ptrs=productRepository.findBySlug(slug);
+		List<Product2> ptrs=new ArrayList<>();
+		for(Product2 p:productRepository.findBySlug(slug)) {
+			p.setImages(imageManager.setTheImages(p));
+			ptrs.add(p);
+		}
 		return ptrs.toString();
 	}
 	
 	//get the product2 by brand name
 	@GetMapping("brands")
 	public String getProductByBrand(@RequestParam ("slug") String slug) {
-		List<Product2> product2s=productRepository.findByBrand(slug);
-		String str="["+product2s.toString()+"]";
+		List<Product2> ptrs=new ArrayList<>();
+		for(Product2 p : productRepository.findByBrand(slug)) {
+			p.setImages(imageManager.setTheImages(p));
+			ptrs.add(p);
+		}
+		String str="["+ptrs.toString()+"]";
 		return str;
 	}
 	
@@ -81,6 +97,7 @@ public class ProductControllers {
 		List<Product2> product2s=new ArrayList<>();
 		for(String id:ids) {
 			Product2 singleProduct=productRepository.findById(id).get();
+			singleProduct.setImages(imageManager.setTheImages(singleProduct));
 			product2s.add(singleProduct);
 		}
 		return product2s.toString();
