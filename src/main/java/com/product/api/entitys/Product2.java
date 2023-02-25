@@ -1,5 +1,6 @@
 package com.product.api.entitys;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,8 +55,29 @@ public class Product2 {
 	@Column(name="CREATED_DT_TIME")
 	Date createdDtTime;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product2")
-	List<Images> images;
+	//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product2")
+	@Transient
+	List<Images> images=new ArrayList<>();
+	
+	//for images of product
+	@Column(name="image_main")
+	String imgMain;
+	@Column(name="image_url1")
+	String imgUrl1;
+	@Column(name="image_url2")
+	String imgUrl2;
+	@Column(name="image_url3")
+	String imgUrl3;
+	@Column(name="image_url4")
+	String imgUrl4;
+	@Column(name="image_url5")
+	String imgUrl5;
+	@Column(name="image_url6")
+	String imgUrl6;
+	@Column(name="image_url7")
+	String imgUrl7;
+	@Column(name="image_url8")
+	String imgUrl8;
 	
 	@ManyToOne
 	Stores store;
@@ -232,16 +254,6 @@ public class Product2 {
 		this.slug = slug;
 	}
 
-	
-
-	public List<Images> getImages() {
-		return images;
-	}
-
-	public void setImages(List<Images> images) {
-		this.images = images;
-	}
-
 	public double getPrice() {
 		return price;
 	}
@@ -290,13 +302,94 @@ public class Product2 {
 		this.categoryId = categoryId;
 	}
 
+	public String getImgMain() {
+		return imgMain;
+	}
+
+	public void setImgMain(String imgMain) {
+		this.imgMain = imgMain;
+	}
+
+	public String getImgUrl1() {
+		return imgUrl1;
+	}
+
+	public void setImgUrl1(String imgUrl1) {
+		this.imgUrl1 = imgUrl1;
+	}
+
+	public String getImgUrl2() {
+		return imgUrl2;
+	}
+
+	public void setImgUrl2(String imgUrl2) {
+		this.imgUrl2 = imgUrl2;
+	}
+
+	public String getImgUrl3() {
+		return imgUrl3;
+	}
+
+	public void setImgUrl3(String imgUrl3) {
+		this.imgUrl3 = imgUrl3;
+	}
+
+	public String getImgUrl4() {
+		return imgUrl4;
+	}
+
+	public void setImgUrl4(String imgUrl4) {
+		this.imgUrl4 = imgUrl4;
+	}
+
+	public String getImgUrl5() {
+		return imgUrl5;
+	}
+
+	public void setImgUrl5(String imgUrl5) {
+		this.imgUrl5 = imgUrl5;
+	}
+
+	public String getImgUrl6() {
+		return imgUrl6;
+	}
+
+	public void setImgUrl6(String imgUrl6) {
+		this.imgUrl6 = imgUrl6;
+	}
+
+	public String getImgUrl7() {
+		return imgUrl7;
+	}
+
+	public void setImgUrl7(String imgUrl7) {
+		this.imgUrl7 = imgUrl7;
+	}
+
+	public String getImgUrl8() {
+		return imgUrl8;
+	}
+
+	public void setImgUrl8(String imgUrl8) {
+		this.imgUrl8 = imgUrl8;
+	}
+
+	public List<Images> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Images> images) {
+		this.images = images;
+	}
+
 	@Override
 	public String toString() {
 		return "{\"id\":" + id + ", \"sku\":\"" + sku + "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":"
 				+ is_featured + ", \"is_hot\":" + is_hot + ", \"sale_price\":" + sale_price + ", \"vendor\":\"" + vendor + "\", \"depot\":" + depot + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"store\":[" + store + "], \"price\":" + price
 				+ ", \"material\":\"" + material + "\", \"brand\":\"" + brand + "\", \"color\":\"" + color + "\", \"description\":\"" + description
 				+ "\"}";
-	}
+	} 
+	
 	
 	
 	
