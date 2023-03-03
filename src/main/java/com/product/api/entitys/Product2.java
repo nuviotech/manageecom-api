@@ -36,13 +36,8 @@ public class Product2 {
 	@Transient
 	int quantity;
 	
-	
-	
 	double sale_price;
-
-	
 	int categoryId;
-	
 	int depot;
 
 	boolean is_active=true;
