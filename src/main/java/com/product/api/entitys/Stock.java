@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -55,9 +57,9 @@ public class Stock {
 	private String sku;
 	
 
-	@OneToOne
+	@OneToOne(mappedBy = "stock")
 	@JsonManagedReference
-	private Product2 product ;
+	private Product2 product;
 	
 	@Column(name="SHELF_CODE",length=20)
 	private String  shelfCode;

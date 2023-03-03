@@ -36,17 +36,19 @@ public class MainController {
 	Random random=new Random();
 	
 	//fetch the all product2
+	/*
 	@GetMapping("/")
 	public List<Product2> allproducts(){
 		List<Product2> product2s=new ArrayList<>();
 		for(Product2 product2:product2Repository.findAll()) {
-			Stock stock=stockRepository.findBySkuAndUserId(product2.getSku(), product2.getUserId());
+			Stock stock=stockRepository.findBySkuAndUserId(product2.getSku(), product2.getUser);
 			product2.setQuantity(stock.getQuantity());
 			product2s.add(product2);
 		}
 		return product2s;
-	}
+	}*/
 	
+	/*
 	//search the product2 by key and user id
 	@GetMapping("/search/{key}/{userId}")
 	public List<Product2> searchProduct(@PathVariable String key,@PathVariable String userId){
@@ -59,7 +61,7 @@ public class MainController {
 		}	
 		return product2s;
 	}
-	
+	*/
 	//add the product2
 	@PostMapping(path="/addProduct",consumes = "application/json")
 	public String addNewProduct(@RequestBody Product2 product2){
