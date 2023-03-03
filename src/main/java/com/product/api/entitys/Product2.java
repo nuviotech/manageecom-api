@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Product2 {
 	
-	@Column(name="Product_Reference_id")
+	@Column(name="product_reference_id")
 	@Id
 	String id;
 	
@@ -35,14 +36,10 @@ public class Product2 {
 	@Transient
 	int quantity;
 	
-	@Column(name="is_featured")
-	boolean is_featured;
 	
-	@Column(name="is_hot")
-	boolean is_hot;
 	
 	double sale_price;
-	String vendor;
+
 	
 	int categoryId;
 	
@@ -79,8 +76,11 @@ public class Product2 {
 	@Column(name="image_url8")
 	String imgUrl8;
 	
+	//add the user here
 	@ManyToOne
-	Stores store;
+	@JoinColumn(name="USR_ID")
+	User userId;
+	
 	
 	@Column(name="MRP")
 	double price;
@@ -97,12 +97,11 @@ public class Product2 {
 	@Column(name="Description")
 	String description;
 	
-	@Column(name="USER_ID")
-	String userId;
 	
 	
-	@OneToOne(mappedBy = "product")
+	@OneToOne
 	@JsonBackReference
+	@JoinColumn(name="STOCK_ID")
 	Stock stock;
 	
 	
@@ -178,13 +177,7 @@ public class Product2 {
 		this.description = description;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+	
 
 	public String getId() {
 		return id;
@@ -192,22 +185,6 @@ public class Product2 {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public boolean isIs_featured() {
-		return is_featured;
-	}
-
-	public void setIs_featured(boolean is_featured) {
-		this.is_featured = is_featured;
-	}
-
-	public boolean isIs_hot() {
-		return is_hot;
-	}
-
-	public void setIs_hot(boolean is_hot) {
-		this.is_hot = is_hot;
 	}
 
 	public double getSale_price() {
@@ -218,13 +195,7 @@ public class Product2 {
 		this.sale_price = sale_price;
 	}
 
-	public String getVendor() {
-		return vendor;
-	}
-
-	public void setVendor(String vendor) {
-		this.vendor = vendor;
-	}
+	
 
 	public int getDepot() {
 		return depot;
@@ -262,13 +233,7 @@ public class Product2 {
 		this.price = price;
 	}
 
-	public Stores getStore() {
-		return store;
-	}
-
-	public void setStore(Stores store) {
-		this.store = store;
-	}
+	
 
 	public Stock getStock() {
 		return stock;
@@ -384,8 +349,8 @@ public class Product2 {
 
 	@Override
 	public String toString() {
-		return "{\"id\":" + id + ", \"sku\":\"" + sku + "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":"
-				+ is_featured + ", \"is_hot\":" + is_hot + ", \"sale_price\":" + sale_price + ", \"vendor\":\"" + vendor + "\", \"depot\":" + depot + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"store\":[" + store + "], \"price\":" + price
+		return "{\"id\":" + id + ", \"sku\":\"" + sku + "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":\"f\""
+				+ ", \"is_hot\":\"hot\""  + ", \"sale_price\":" + sale_price + ", \"vendor\":\""  + "\", \"depot\":" + depot + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"user\":[" +userId+ "], \"price\":" + price
 				+ ", \"material\":\"" + material + "\", \"brand\":\"" + brand + "\", \"color\":\"" + color + "\", \"description\":\"" + description
 				+ "\"}";
 	} 
