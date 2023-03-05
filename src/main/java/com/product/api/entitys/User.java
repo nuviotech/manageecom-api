@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 
 @Entity
@@ -28,6 +30,7 @@ public class User{
 	private String Companyname;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userId")
+	@JsonBackReference
 	List<Product2> ptrs;
 
 
