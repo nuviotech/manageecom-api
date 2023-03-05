@@ -16,10 +16,12 @@ import com.product.api.Repo.Product2Repository;
 import com.product.api.Repo.SalesOrderItemRepository;
 import com.product.api.Repo.SalesOrderRepository;
 import com.product.api.Repo.StockRepository;
+import com.product.api.Repo.UserRepository;
 import com.product.api.entitys.Product2;
 import com.product.api.entitys.SalesOrder;
 import com.product.api.entitys.SalesOrderItem;
 import com.product.api.entitys.Stock;
+import com.product.api.entitys.User;
 
 @RestController
 public class MainController {
@@ -32,6 +34,8 @@ public class MainController {
 	SalesOrderItemRepository salesOrderItemRepository;
 	@Autowired
 	StockRepository stockRepository;
+	@Autowired
+	UserRepository userRepository;
 	
 	Random random=new Random();
 	
@@ -116,5 +120,8 @@ public class MainController {
 				return "Order not place . something wrong....";
 			}
 	}
+	
+	
+	
 	
 }
