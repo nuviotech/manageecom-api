@@ -23,7 +23,6 @@ import com.product.api.entitys.Product2;
 import com.product.api.entitys.User;
 import com.product.api.service.ImageManager;
 
-@CrossOrigin(origins = {"http://localhost:3000/","https://nuvio.in/","https://manageecom.com:8081/","https://manageecom.com:8083/","https://manageecom.com:8084/"}, maxAge = 3600)
 @RestController
 public class ProductControllers {
 	@Autowired
