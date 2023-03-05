@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Product2 {
@@ -74,8 +75,8 @@ public class Product2 {
 	//add the user here
 	@ManyToOne
 	@JoinColumn(name="USR_ID")
+	@JsonManagedReference
 	User userId;
-	
 	
 	@Column(name="MRP")
 	double price;
@@ -340,6 +341,14 @@ public class Product2 {
 
 	public void setImages(List<Images> images) {
 		this.images = images;
+	}
+
+	public User getUserId() {
+		return userId;
+	}
+
+	public void setUserId(User userId) {
+		this.userId = userId;
 	}
 
 	@Override

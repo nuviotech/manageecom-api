@@ -68,6 +68,7 @@ public class ProductControllers {
 	}
 	
 	//get the product2 by id
+	//delete
 	@GetMapping("products/{productId}")
 	public String getProductById(@PathVariable int productId) {
 		Product2 product2=productRepository.getById(productId+"");
@@ -101,19 +102,27 @@ public class ProductControllers {
 	}
 	
 	//get multiple product2s by ids
-	@GetMapping("productsByIds")
-	public String getProductsByIds(@RequestParam("id_in") List<String> ids) {
+	//delete
+	@PostMapping("productsByIds")
+	public String getProductsByIds(@RequestBody String idStr) {
+		System.out.println("jhdfjsdhfj");
+		String ids[]=idStr.split(idStr);
 		List<Product2> product2s=new ArrayList<>();
 		for(String id:ids) {
-			Product2 singleProduct=productRepository.findById(id).get();
-			singleProduct.setImages(imageManager.setTheImages(singleProduct));
-			product2s.add(singleProduct);
+			System.out.println("id : "+id);
+			if(id.length()>0) {
+				System.out.println(id.length()+" length");
+				Product2 singleProduct=productRepository.findById(id).get();
+				singleProduct.setImages(imageManager.setTheImages(singleProduct));
+				product2s.add(singleProduct);
+			}
 		}
 		return product2s.toString();
 	}
 	
 	@PostMapping("/getProducts")
 	public List<Product2> getProducts(@RequestBody String str) {
+		System.out.println("get products");
 		String array[]=str.split("&");
 		User user=userRepository.findById(array[0]).get();
 		List<Product2> ptrs=new ArrayList<>();
@@ -151,6 +160,5 @@ public class ProductControllers {
 		}	
 		return ptr;
 	}
-	
 	
 }
