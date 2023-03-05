@@ -22,4 +22,6 @@ public interface Product2Repository extends JpaRepository<Product2, String> {
 	List<Product2> findBySlug(String slug);
 	List<Product2> findByBrand(String brand);
 	
+	public List<Product2> findByUserId(String email);
+	
 }

@@ -11,12 +11,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.product.api.Repo.Product2Repository;
+import com.product.api.Repo.UserRepository;
 import com.product.api.entitys.Images;
 import com.product.api.entitys.Product2;
+import com.product.api.entitys.User;
 import com.product.api.service.ImageManager;
 
 @RestController
@@ -25,8 +29,11 @@ public class ProductControllers {
 	Product2Repository productRepository;
 	@Autowired
 	ImageManager imageManager;
+	@Autowired
+	UserRepository userRepository;
 	
 	//get all product2s
+	//delete
 	@GetMapping("products")
 	public String getAllProducts(@RequestParam("_limit") int limit){
 		System.out.println("Name : "+limit);
@@ -40,9 +47,9 @@ public class ProductControllers {
 		return ptrs.toString();
 	}
 	
+	
 	@GetMapping("productsByPage")
 	public String getProductsByPage(@RequestParam("_limit") int limit,@RequestParam("_start") int start){
-		//System.out.println("Name : "+limit+" start : "+start+" -> page : "+((start/limit)-1));
 		Pageable pageble = PageRequest.of((start/limit)-1, limit);
 		List<Product2> ptrs=new ArrayList<>();
 		Page<Product2> page=productRepository.findAll(pageble);
@@ -54,6 +61,7 @@ public class ProductControllers {
 	}
 	
 	//get product2 count
+	//delete
 	@GetMapping("products/count")
 	public int getProductCount() {
 		return productRepository.findAll().size();
@@ -68,6 +76,7 @@ public class ProductControllers {
 	}
 	
 	//get the product2s by categorywise (slug)
+	//delete
 	@GetMapping("product-categories")
 	public String getProductBySlug(@RequestParam("slug") String slug) {
 		List<Product2> ptrs=new ArrayList<>();
@@ -79,6 +88,7 @@ public class ProductControllers {
 	}
 	
 	//get the product2 by brand name
+	//delete
 	@GetMapping("brands")
 	public String getProductByBrand(@RequestParam ("slug") String slug) {
 		List<Product2> ptrs=new ArrayList<>();
@@ -102,7 +112,45 @@ public class ProductControllers {
 		return product2s.toString();
 	}
 	
+	@PostMapping("/getProducts")
+	public List<Product2> getProducts(@RequestBody String str) {
+		String array[]=str.split("&");
+		User user=userRepository.findById(array[0]).get();
+		List<Product2> ptrs=new ArrayList<>();
+
+		for(Product2 p:user.getPtrs()) {
+			p.setImages(imageManager.setTheImages(p));
+			ptrs.add(p);	
+		}
+		return ptrs;
+		//return user.getPtrs() ;
+	}
 	
+	@PostMapping("/getProductsByCategory/{slug}")
+	public List<Product2> getProductsByCategory(@RequestBody String str,@PathVariable String slug) {
+		String array[]=str.split("&");
+		User user=userRepository.findById(array[0]).get();
+		List<Product2> ptr=new ArrayList<>();
+		for (Product2 p:user.getPtrs()) {
+			if(p.getSlug().equalsIgnoreCase(slug)) {
+				ptr.add(p);
+			}
+		}	
+		return ptr;
+	}
+	
+	@PostMapping("/getProductsByBrand/{slug}")
+	public List<Product2> getProductsByBrand(@RequestBody String str,@PathVariable String slug) {
+		String array[]=str.split("&");
+		User user=userRepository.findById(array[0]).get();
+		List<Product2> ptr=new ArrayList<>();
+		for (Product2 p:user.getPtrs()) {
+			if(p.getBrand().equalsIgnoreCase(slug)) {
+				ptr.add(p);
+			}
+		}	
+		return ptr;
+	}
 	
 	
 }

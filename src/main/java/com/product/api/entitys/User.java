@@ -56,6 +56,14 @@ public class User{
 		Companyname = companyname;
 	}
 
+	public List<Product2> getPtrs() {
+		return ptrs;
+	}
+
+	public void setPtrs(List<Product2> ptrs) {
+		this.ptrs = ptrs;
+	}
+
 	@Override
 	public String toString() {
 		return "{ \"loginId\":\"" + loginId + "\", \"userName\":\"" + userName + "\", \"Companyname\":\"" + Companyname + "\"}";
