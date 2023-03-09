@@ -127,17 +127,24 @@ public class ProductControllers {
 	}
 	
 	@PostMapping("/getProducts")
+
 	public List<Product2> getProducts(@RequestParam String sellerId) {
 		System.out.println("get products");
+
 		List<Product2> ptrs=new ArrayList<>();
+		
+
+		System.out.println("get products || "+sellerId);
 		try {
 			
-			User user=userRepository.findById(sellerId).get();
-			for(Product2 p:user.getPtrs()) {
+			//User user=userRepository.findById(sellerId).get();
+			for(Product2 p:productRepository.findByUserId(sellerId+"")) {
 				p.setImages(imageManager.setTheImages(p));
 				ptrs.add(p);	
 			}
+			System.out.println("ptrs : "+ptrs);
 			return ptrs;
+			
 			//return user.getPtrs() ;
 		}catch(Exception e) {
 			System.out.println("getProducts (ERROR) : "+e.getMessage());
