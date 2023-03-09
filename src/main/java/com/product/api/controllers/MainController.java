@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,8 @@ public class MainController {
 	@Autowired
 	UserRepository userRepository;
 	
-	Random random=new Random();
+	//Random random=new Random();
+
 	
 	//fetch the all product2
 	/*
@@ -65,12 +67,13 @@ public class MainController {
 		}	
 		return product2s;
 	}
-	*/
+	
 	//add the product2
 	@PostMapping(path="/addProduct",consumes = "application/json")
 	public String addNewProduct(@RequestBody Product2 product2){
 		try {
-			product2.setProductRefId(random.nextInt()+"_product_2022");
+			//product2.setProductRefId(random.nextInt()+"_product_2022");
+			product2.setProductRefId(UUID.randomUUID().toString().replaceAll("-", ""));
 			product2Repository.save(product2);
 			return "Product2 is save successfully.";
 			
@@ -79,7 +82,7 @@ public class MainController {
 			System.out.println("Product2 not save");
 			return "Product2 not saved.";
 		}	
-	}
+	}*/
 	
 	//place the order
 	@PostMapping("/placeOrder/{productId}")
@@ -87,12 +90,13 @@ public class MainController {
 		
 		
 			try {
-				String invoicenumber=random.nextInt()+"_invoce_2022";
+				//uuid
+				String invoicenumber=UUID.randomUUID().toString().replaceAll("-", "");
 				Product2 p=product2Repository.findById(productId).get();
 				if(p==null)
 					return "product2 id is wrong";
-				
-				salesOrder.setChannelOrderId(random.nextInt()+"Y2022");
+				//uuid
+				salesOrder.setChannelOrderId(UUID.randomUUID().toString().replaceAll("-", ""));
 				salesOrder.setChannelId(30);
 				salesOrder.setStatus("Pending");
 				salesOrder.setUserId("bestdeals7710098678");
@@ -120,8 +124,4 @@ public class MainController {
 				return "Order not place . something wrong....";
 			}
 	}
-	
-	
-	
-	
 }

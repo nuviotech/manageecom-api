@@ -8,10 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Table(name="STOCK")
 public class Stock {
 	/*
 	@Id
@@ -249,7 +251,4 @@ public class Stock {
 	public void setOptimisePrice(String optimisePrice) {
 		this.optimisePrice = optimisePrice;
 	}
-	
-	
-	
 }

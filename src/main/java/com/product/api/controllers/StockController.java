@@ -18,7 +18,7 @@ import com.product.api.entitys.Product2;
 public class StockController {
 	@Autowired
 	Product2Repository product2Repository;
-	
+	/*
 	@PostMapping("/increaseStockQuantity")
 	private Product2 increaseStockQuantity(@RequestParam("quan") int quatity,@RequestParam("pid") int productId) {
 		Product2 product=product2Repository.findById(productId+"").get();
@@ -27,5 +27,5 @@ public class StockController {
 		System.out.println(quatity+" | "+product.getTitle());
 		return product;//if done
 	}
-	
+	*/
 }

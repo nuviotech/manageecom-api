@@ -50,14 +50,20 @@ public class ProductControllers {
 	
 	@GetMapping("productsByPage")
 	public String getProductsByPage(@RequestParam("_limit") int limit,@RequestParam("_start") int start){
-		Pageable pageble = PageRequest.of((start/limit)-1, limit);
-		List<Product2> ptrs=new ArrayList<>();
-		Page<Product2> page=productRepository.findAll(pageble);
-		for(Product2 p:page) {
-			p.setImages(imageManager.setTheImages(p));
-			ptrs.add(p);
+		try {
+			Pageable pageble = PageRequest.of((start/limit)-1, limit);
+			List<Product2> ptrs=new ArrayList<>();
+			Page<Product2> page=productRepository.findAll(pageble);
+			for(Product2 p:page) {
+				p.setImages(imageManager.setTheImages(p));
+				ptrs.add(p);
+			}
+			return ptrs.toString();
+		}catch(Exception e) {
+			System.out.println("ProductByPage (ERROR) : "+e.getMessage());
+			e.printStackTrace();
+			return "";
 		}
-		return ptrs.toString();
 	}
 	
 	//get product2 count
@@ -123,42 +129,58 @@ public class ProductControllers {
 	@PostMapping("/getProducts")
 	public List<Product2> getProducts(@RequestBody String str) {
 		System.out.println("get products");
-		String array[]=str.split("&");
-		User user=userRepository.findById(array[0]).get();
 		List<Product2> ptrs=new ArrayList<>();
-
-		for(Product2 p:user.getPtrs()) {
-			p.setImages(imageManager.setTheImages(p));
-			ptrs.add(p);	
+		try {
+			String array[]=str.split("&");
+			User user=userRepository.findById(array[0]).get();
+			for(Product2 p:user.getPtrs()) {
+				p.setImages(imageManager.setTheImages(p));
+				ptrs.add(p);	
+			}
+			return ptrs;
+			//return user.getPtrs() ;
+		}catch(Exception e) {
+			System.out.println("getProducts (ERROR) : "+e.getMessage());
+			return ptrs;
 		}
-		return ptrs;
-		//return user.getPtrs() ;
 	}
 	
 	@PostMapping("/getProductsByCategory/{slug}")
 	public List<Product2> getProductsByCategory(@RequestBody String str,@PathVariable String slug) {
 		String array[]=str.split("&");
-		User user=userRepository.findById(array[0]).get();
 		List<Product2> ptr=new ArrayList<>();
-		for (Product2 p:user.getPtrs()) {
-			if(p.getSlug().equalsIgnoreCase(slug)) {
-				ptr.add(p);
-			}
-		}	
-		return ptr;
+		try {
+			User user=userRepository.findById(array[0]).get();
+			for (Product2 p:user.getPtrs()) {
+				if(p.getSlug().equalsIgnoreCase(slug)) {
+					ptr.add(p);
+				}
+			}	
+			return ptr;
+		}catch(Exception e) {
+			System.out.println("getproductByCategorys (ERROR) : "+e.getMessage());
+			return ptr;
+		}
 	}
 	
 	@PostMapping("/getProductsByBrand/{slug}")
 	public List<Product2> getProductsByBrand(@RequestBody String str,@PathVariable String slug) {
+		List<Product2> ptr=new ArrayList<>();
+		try {
 		String array[]=str.split("&");
 		User user=userRepository.findById(array[0]).get();
-		List<Product2> ptr=new ArrayList<>();
+		
 		for (Product2 p:user.getPtrs()) {
 			if(p.getBrand().equalsIgnoreCase(slug)) {
 				ptr.add(p);
 			}
 		}	
 		return ptr;
+		}catch(Exception e) {
+			System.out.println("getProductByBrand (ERROR) : "+e.getMessage());
+			e.printStackTrace();
+			return ptr;
+		}
 	}
 	
 }

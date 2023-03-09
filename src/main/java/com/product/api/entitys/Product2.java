@@ -13,12 +13,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
+
+
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Table(name="PRODUCT2")
 public class Product2 {
 	
 	@Column(name="product_reference_id")
@@ -358,8 +362,4 @@ public class Product2 {
 				+ ", \"material\":\"" + material + "\", \"brand\":\"" + brand + "\", \"color\":\"" + color + "\", \"description\":\"" + description
 				+ "\"}";
 	} 
-	
-	
-	
-	
 }
