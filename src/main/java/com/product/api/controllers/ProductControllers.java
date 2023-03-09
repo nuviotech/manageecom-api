@@ -127,12 +127,12 @@ public class ProductControllers {
 	}
 	
 	@PostMapping("/getProducts")
-	public List<Product2> getProducts(@RequestBody String str) {
+	public List<Product2> getProducts(@RequestParam String sellerId) {
 		System.out.println("get products");
 		List<Product2> ptrs=new ArrayList<>();
 		try {
-			String array[]=str.split("&");
-			User user=userRepository.findById(array[0]).get();
+			
+			User user=userRepository.findById(sellerId).get();
 			for(Product2 p:user.getPtrs()) {
 				p.setImages(imageManager.setTheImages(p));
 				ptrs.add(p);	
