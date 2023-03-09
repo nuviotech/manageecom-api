@@ -22,8 +22,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-//product2
-@Table(name="Product2")
+
+@Table(name="product2")
+
 public class Product2 {
 	
 	@Column(name="product_reference_id")
@@ -43,6 +44,7 @@ public class Product2 {
 	
 	@Column(name="category_id")
 	int categoryId;
+
 	@Column(name="depot")
 	int depot;
 
@@ -114,6 +116,7 @@ public class Product2 {
 	public void setProductRefId(String productRefId) {
 		this.id = productRefId;
 	}
+
 
 	public String getTitle() {
 		return title;

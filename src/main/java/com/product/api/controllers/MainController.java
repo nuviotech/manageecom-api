@@ -106,6 +106,7 @@ public class MainController {
 				salesOrder.setDate(new Date());
 				
 				SalesOrderItem  salesOrderItem=new SalesOrderItem();
+
 				salesOrderItem.setQuantity(1);//fetch from product2
 				salesOrderItem.setSalesOrderId(100);
 				salesOrderItem.setOrderItemStatus("APPROVED");
