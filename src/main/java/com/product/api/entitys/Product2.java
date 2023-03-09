@@ -32,9 +32,7 @@ public class Product2 {
 	
 	@Column(name="CUD",length = 1)
 	String cud;
-	
-	
-	
+
 	@Column(name="Title")
 	String title;
 	
@@ -80,10 +78,11 @@ public class Product2 {
 	String imgUrl8;
 	
 	//add the user here
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="USR_ID")
-	@JsonManagedReference
-	User userId;
+	@JsonManagedReference*/
+	@Column(name="USR_ID")
+	String userId;
 	
 	@Column(name="MRP")
 	double price;
@@ -342,11 +341,13 @@ public class Product2 {
 		this.images = images;
 	}
 
-	public User getUserId() {
+	
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(User userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
