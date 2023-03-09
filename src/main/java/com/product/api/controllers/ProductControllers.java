@@ -132,28 +132,12 @@ public class ProductControllers {
 	
 	@PostMapping("/getProducts")
 
-	public List<Product2> getProducts(@RequestParam String sellerId) {
+	public List<Map<String, Object>> getProducts(@RequestParam String sellerId) {
 		System.out.println("get products");
-
-		List<Product2> ptrs=new ArrayList<>();
 		
-
-		System.out.println("get products || "+sellerId);
-		try {
-			
-			//User user=userRepository.findById(sellerId).get();
-			for(Product2 p:productRepository.findByUserId(sellerId+"")) {
-				p.setImages(imageManager.setTheImages(p));
-				ptrs.add(p);	
-			}
-			System.out.println("ptrs : "+ptrs);
-			return ptrs;
-			
-			//return user.getPtrs() ;
-		}catch(Exception e) {
-			System.out.println("getProducts (ERROR) : "+e.getMessage());
-			return ptrs;
-		}
+		List<Map<String, Object> ptrs = jdbcTemplate.queryforList("select * from product2 where USER_ID=?", new String[]{sellerId});
+		
+		return ptrs;
 	}
 	
 	@PostMapping("/getProductsByCategory/{slug}")
