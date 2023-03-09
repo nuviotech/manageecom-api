@@ -32,6 +32,10 @@ public class ProductControllers {
 	@Autowired
 	UserRepository userRepository;
 	
+	//jdbcTemplate
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
 	//get all product2s
 	//delete
 	@GetMapping("products")
