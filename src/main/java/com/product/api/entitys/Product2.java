@@ -22,7 +22,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="PRODUCT2")
+//product2
+@Table(name="Product2")
 public class Product2 {
 	
 	@Column(name="product_reference_id")
@@ -32,8 +33,7 @@ public class Product2 {
 	@Column(name="CUD",length = 1)
 	String cud;
 	
-	@Column(name="SKU")
-	String sku;
+	
 	
 	@Column(name="Title")
 	String title;
@@ -42,7 +42,10 @@ public class Product2 {
 	int quantity;
 	
 	double sale_price;
+	
+	@Column(name="category_id")
 	int categoryId;
+	@Column(name="depot")
 	int depot;
 
 	boolean is_active=true;
@@ -111,14 +114,6 @@ public class Product2 {
 
 	public void setProductRefId(String productRefId) {
 		this.id = productRefId;
-	}
-
-	public String getSku() {
-		return sku;
-	}
-
-	public void setSku(String sku) {
-		this.sku = sku;
 	}
 
 	public String getTitle() {
@@ -357,7 +352,7 @@ public class Product2 {
 
 	@Override
 	public String toString() {
-		return "{\"id\":" + id + ", \"sku\":\"" + sku + "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":\"f\""
+		return "{\"id\":" + id + ", \"sku\":\""  + "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":\"f\""
 				+ ", \"is_hot\":\"hot\""  + ", \"sale_price\":" + sale_price + ", \"vendor\":\""  + "\", \"depot\":" + depot + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"user\":[" +userId+ "], \"price\":" + price
 				+ ", \"material\":\"" + material + "\", \"brand\":\"" + brand + "\", \"color\":\"" + color + "\", \"description\":\"" + description
 				+ "\"}";
