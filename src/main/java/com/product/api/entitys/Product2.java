@@ -42,7 +42,10 @@ public class Product2 {
 	int quantity;
 	
 	double sale_price;
+	
+	@Column(name="category_id")
 	int categoryId;
+	
 	int depot;
 
 	boolean is_active=true;
