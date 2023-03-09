@@ -136,7 +136,7 @@ public class ProductControllers {
 	public List<Map<String, Object>> getProducts(@RequestParam String sellerId) {
 		System.out.println("get products");
 		
-		List<Map<String, Object> ptrs = jdbcTemplate.queryForList("select * from product2 where USER_ID=?", new String[]{sellerId});
+		List<Map<String, Object>> ptrs = jdbcTemplate.queryForList("select * from product2 where USER_ID=?", new String[]{sellerId});
 		
 		return ptrs;
 	}
