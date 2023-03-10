@@ -23,8 +23,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 
+//product2
 @Table(name="product2")
-
 public class Product2 {
 	
 	@Column(name="product_reference_id")
@@ -44,9 +44,6 @@ public class Product2 {
 	
 	@Column(name="category_id")
 	int categoryId;
-
-	@Column(name="depot")
-	int depot;
 
 	boolean is_active=true;
 
@@ -190,19 +187,7 @@ public class Product2 {
 
 	public void setSale_price(double sale_price) {
 		this.sale_price = sale_price;
-	}
-
-	
-
-	public int getDepot() {
-		return depot;
-	}
-
-	public void setDepot(int depot) {
-		this.depot = depot;
-	}
-
-	
+	}	
 
 	public boolean isIs_active() {
 		return is_active;
@@ -356,8 +341,8 @@ public class Product2 {
 
 	@Override
 	public String toString() {
-		return "{\"id\":" + id + ", \"sku\":\""  + "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":\"f\""
-				+ ", \"is_hot\":\"hot\""  + ", \"sale_price\":" + sale_price + ", \"vendor\":\""  + "\", \"depot\":" + depot + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"user\":[" +userId+ "], \"price\":" + price
+		return "{\"id\":" + id + ", \"sku\":\"" +"sku_123_Test"+ "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":\"f\""
+				+ ", \"is_hot\":\"hot\"" +6+ ", \"sale_price\":" + sale_price + ", \"vendor\":\""  + "\", \"depot\":" + 10 + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"user\":[" +userId+ "], \"price\":" + price
 				+ ", \"material\":\"" + material + "\", \"brand\":\"" + brand + "\", \"color\":\"" + color + "\", \"description\":\"" + description
 				+ "\"}";
 	} 

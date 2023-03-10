@@ -11,7 +11,6 @@ public class ChannelController {
 	
 	@PostMapping("/marketplace")
 	public String marketplace(@PathVariable String marketplace_id, @PathVariable String cud) {
-		
 		return "";
 	}
 }

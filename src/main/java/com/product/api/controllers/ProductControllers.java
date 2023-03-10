@@ -3,12 +3,13 @@ package com.product.api.controllers;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Hashmap;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ public class ProductControllers {
 	@Autowired
 	UserRepository userRepository;
 	
-	//jdbcTemplate
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
@@ -132,8 +133,25 @@ public class ProductControllers {
 	}
 	
 	@PostMapping("/getProducts")
-
-	public List<Map<String, Object>> getProducts(@RequestParam String sellerId) {
+	public List<Product2> getProducts(@RequestBody String str) {
+		System.out.println("get products (/getProducts) "+str);
+		List<Product2> ptrs=new ArrayList<>();
+		try{
+				for(Product2 p:productRepository.findByUserId(str)) {
+				p.setImages(imageManager.setTheImages(p));
+				ptrs.add(p);	
+				}
+				System.out.println("Product length : "+ptrs.size());
+				return ptrs;
+		}catch(Exception e) {
+			System.out.println("getProducts (ERROR) : "+e.getMessage());
+			return ptrs;
+		}
+	}
+	
+	//jdbc template
+	@PostMapping("/getProductsJdbc")
+	public List<Map<String, Object>> getProductsJdbc(@RequestParam String sellerId) {
 		System.out.println("get products");
 		
 		List<Map<String, Object>> ptrs = jdbcTemplate.queryForList("select * from product2 where USER_ID=?", new String[]{sellerId});
@@ -177,6 +195,17 @@ public class ProductControllers {
 			e.printStackTrace();
 			return ptr;
 		}
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "Done, sellerProduct ready to work...";
+	}
+	
+	@GetMapping("/test1")
+	public List<Product2> test1(){
+		System.out.println("fetching product...");
+		return productRepository.findAll();
 	}
 	
 }
