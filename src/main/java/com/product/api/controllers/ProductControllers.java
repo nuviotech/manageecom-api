@@ -136,12 +136,12 @@ public class ProductControllers {
 		System.out.println("get products (/getProducts) "+str);
 		List<Product2> ptrs=new ArrayList<>();
 		try{
-				for(Product2 p:productRepository.findByUserId(str)) {
+			for(Product2 p:productRepository.findByUserId(str)) {
 				p.setImages(imageManager.setTheImages(p));
 				ptrs.add(p);	
-				}
-				System.out.println("Product length : "+ptrs.size());
-				return ptrs;
+			}
+			System.out.println("Product length : "+ptrs.size());
+			return ptrs;
 		}catch(Exception e) {
 			System.out.println("getProducts (ERROR) : "+e.getMessage());
 			return ptrs;
@@ -158,53 +158,46 @@ public class ProductControllers {
 		return ptrs;
 	}
 	
-	@PostMapping("/getProductsByCategory/{slug}")
-	public List<Product2> getProductsByCategory(@RequestBody String str,@PathVariable String slug) {
+	@PostMapping("/getProductsByCategory")
+	public String getProductsByCategory(@RequestBody String str) {
 		String array[]=str.split("&");
+		String slug = array[1];
+		System.out.println("getproductbycategories : "+array[0]+" | "+array[1] );
 		List<Product2> ptr=new ArrayList<>();
 		try {
-			User user=userRepository.findById(array[0]).get();
-			for (Product2 p:user.getPtrs()) {
+			for (Product2 p:productRepository.findByUserId(array[0])){
 				if(p.getSlug().equalsIgnoreCase(slug)) {
+					p.setImages(imageManager.setTheImages(p));
 					ptr.add(p);
 				}
 			}	
-			return ptr;
+			return ptr.toString();
 		}catch(Exception e) {
 			System.out.println("getproductByCategorys (ERROR) : "+e.getMessage());
-			return ptr;
+			return ptr.toString();
 		}
 	}
 	
-	@PostMapping("/getProductsByBrand/{slug}")
-	public List<Product2> getProductsByBrand(@RequestBody String str,@PathVariable String slug) {
+	@PostMapping("/getProductsByBrand")
+	public String getProductsByBrand(@RequestBody String str) {
 		List<Product2> ptr=new ArrayList<>();
-		try {
 		String array[]=str.split("&");
-		User user=userRepository.findById(array[0]).get();
-		
-		for (Product2 p:user.getPtrs()) {
-			if(p.getBrand().equalsIgnoreCase(slug)) {
-				ptr.add(p);
-			}
-		}	
-		return ptr;
+		String slug=array[1];
+		System.out.println("getproductbybrand : "+array[0]+" | "+array[1] );
+		try {
+			for (Product2 p:productRepository.findByUserId(array[0])) {
+				if(p.getBrand().equalsIgnoreCase(slug)) {
+					p.setImages(imageManager.setTheImages(p));
+					ptr.add(p);
+				}
+			}	
+			return ptr.toString();
 		}catch(Exception e) {
 			System.out.println("getProductByBrand (ERROR) : "+e.getMessage());
 			e.printStackTrace();
-			return ptr;
+			return "none";
 		}
 	}
 	
-	@GetMapping("/test")
-	public String test() {
-		return "Done, sellerProduct ready to work...";
-	}
-	
-	@GetMapping("/test1")
-	public List<Product2> test1(){
-		System.out.println("fetching product...");
-		return productRepository.findAll();
-	}
 	
 }

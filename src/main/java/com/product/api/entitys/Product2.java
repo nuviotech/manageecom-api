@@ -79,7 +79,7 @@ public class Product2 {
 	/*@ManyToOne
 	@JoinColumn(name="USR_ID")
 	@JsonManagedReference*/
-	@Column(name="USR_ID")
+	@Column(name="user_id")
 	String userId;
 	
 	@Column(name="MRP")
@@ -340,7 +340,7 @@ public class Product2 {
 	@Override
 	public String toString() {
 		return "{\"id\":" + id + ", \"sku\":\"" +"sku_123_Test"+ "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":\"f\""
-				+ ", \"is_hot\":\"hot\"" +6+ ", \"sale_price\":" + sale_price + ", \"vendor\":\""  + "\", \"depot\":" + 10 + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"user\":[" +userId+ "], \"price\":" + price
+				+ ", \"is_hot\":\"hot\"" + ", \"sale_price\":" + sale_price + ", \"vendor\":\""  + "\", \"depot\":" + 10 + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"user\":\"" +userId+ "\", \"price\":" + price
 				+ ", \"material\":\"" + material + "\", \"brand\":\"" + brand + "\", \"color\":\"" + color + "\", \"description\":\"" + description
 				+ "\"}";
 	} 
