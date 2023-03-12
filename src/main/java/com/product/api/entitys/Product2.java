@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+
 //product2
 @Table(name="product2")
 public class Product2 {
@@ -112,6 +113,7 @@ public class Product2 {
 	public void setProductRefId(String productRefId) {
 		this.id = productRefId;
 	}
+
 
 	public String getTitle() {
 		return title;
