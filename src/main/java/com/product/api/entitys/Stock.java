@@ -59,9 +59,9 @@ public class Stock {
 	private String sku;
 	
 
-	@OneToOne(mappedBy = "stock")
-	@JsonManagedReference
-	private Product2 product;
+	/*@OneToOne(mappedBy = "stock")
+	@JsonManagedReference*/
+	private String productId;
 	
 	@Column(name="SHELF_CODE",length=20)
 	private String  shelfCode;
@@ -124,12 +124,12 @@ public class Stock {
 		this.sku = sku;
 	}
 
-	public Product2 getProduct() {
-		return product;
+	public String getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product2 product) {
-		this.product = product;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
 	public String getShelfCode() {

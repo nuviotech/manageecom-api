@@ -95,15 +95,15 @@ public class Product2 {
 	@Column(name="Color")
 	String color;
 	
-	@Column(name="Description")
+	@Column(name="Description", length=1000)
 	String description;
 	
-	
-	
+	/*
 	@OneToOne
 	@JsonBackReference
-	@JoinColumn(name="STOCK_ID")
-	Stock stock;
+	@JoinColumn(name="STOCK_ID")*/
+	@Column(name="STOCK_ID")
+	int stock;
 	
 	
 	public String getProductRefId() {
@@ -216,15 +216,15 @@ public class Product2 {
 	}
 
 	
-
-	public Stock getStock() {
+	
+	public int getStock() {
 		return stock;
 	}
 
-	public void setStock(Stock stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	
+
 	public String getCud() {
 		return cud;
 	}

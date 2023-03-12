@@ -3,7 +3,7 @@ package com.product.api.controllers;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -137,6 +137,7 @@ public class ProductControllers {
 		System.out.println("get products (/getProducts) "+str);
 		List<Product2> ptrs=new ArrayList<>();
 		try{
+			//our userId is email id
 			for(Product2 p:productRepository.findByUserId(str)) {
 				p.setImages(imageManager.setTheImages(p));
 				ptrs.add(p);	
@@ -199,6 +200,7 @@ public class ProductControllers {
 			return "none";
 		}
 	}
+	
 	
 	
 }
