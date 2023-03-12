@@ -136,6 +136,7 @@ public class ProductControllers {
 		System.out.println("get products (/getProducts) "+str);
 		List<Product2> ptrs=new ArrayList<>();
 		try{
+			//our userId is email id
 			for(Product2 p:productRepository.findByUserId(str)) {
 				p.setImages(imageManager.setTheImages(p));
 				ptrs.add(p);	
@@ -198,6 +199,7 @@ public class ProductControllers {
 			return "none";
 		}
 	}
+	
 	
 	
 }
