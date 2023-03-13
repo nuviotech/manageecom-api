@@ -15,42 +15,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name="STOCK")
 public class Stock {
-	/*
-	@Id
-	int STOCK_ID;
-	
-	@Column(name="SKU")
-	String sku;
-	@Column(name="USER_ID")
-	String userId;
-	@Column(name="QUANTITY")
-	int quentity;
-	public int getSTOCK_ID() {
-		return STOCK_ID;
-	}
-	public void setSTOCK_ID(int sTOCK_ID) {
-		STOCK_ID = sTOCK_ID;
-	}
-	public String getSku() {
-		return sku;
-	}
-	public void setSku(String sku) {
-		this.sku = sku;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public int getQuentity() {
-		return quentity;
-	}
-	public void setQuentity(int quentity) {
-		this.quentity = quentity;
-	}
-	*/
-	
 	@Id
 	@Column(name="STOCK_ID")
 	private int stockId;
@@ -59,9 +23,9 @@ public class Stock {
 	private String sku;
 	
 
-	/*@OneToOne(mappedBy = "stock")
-	@JsonManagedReference*/
-	private String productId;
+	@OneToOne(mappedBy = "stock")
+	@JsonManagedReference
+	private Product2 product;
 	
 	@Column(name="SHELF_CODE",length=20)
 	private String  shelfCode;
@@ -119,17 +83,17 @@ public class Stock {
 	public String getSku() {
 		return sku;
 	}
-
+	
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
 
-	public String getProductId() {
-		return productId;
+	public Product2 getProduct() {
+		return product;
 	}
 
-	public void setProductId(String productId) {
-		this.productId = productId;
+	public void setProduct(Product2 product) {
+		this.product = product;
 	}
 
 	public String getShelfCode() {
@@ -251,4 +215,13 @@ public class Stock {
 	public void setOptimisePrice(String optimisePrice) {
 		this.optimisePrice = optimisePrice;
 	}
+
+	@Override
+	public String toString() {
+		return " {\"stockId\" : " + stockId + ", \"sku\":\"" + sku + "\",\"shelfCode\":\"" + shelfCode
+				+ "\", \"quantity\":" + quantity + ", \"itemLength\":\"" + itemLength + "\", \"itemHeight\":\"" + itemHeight
+				+ "\", \"itemWidth\":\"" + itemWidth + "\", \"itemWeight\":\"" + itemWeight + "\", \"inventoryType\":" + inventoryType
+				+ "}";
+	}
+	
 }
