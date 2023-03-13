@@ -140,6 +140,8 @@ public class ProductControllers {
 			//our userId is email id
 			for(Product2 p:productRepository.findByUserId(str)) {
 				p.setImages(imageManager.setTheImages(p));
+				//set the stock details
+				p.setStockDetails(p.getStock().toString());
 				ptrs.add(p);	
 			}
 			System.out.println("Product length : "+ptrs.size());

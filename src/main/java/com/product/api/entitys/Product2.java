@@ -34,7 +34,7 @@ public class Product2 {
 	@Column(name="CUD",length = 1)
 	String cud;
 
-	@Column(name="Title")
+	@Column(name="Title",length=1000)
 	String title;
 	
 	@Transient
@@ -55,6 +55,10 @@ public class Product2 {
 	//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product2")
 	@Transient
 	List<Images> images=new ArrayList<>();
+	@Transient
+	String stockDetails;
+	
+	
 	
 	//for images of product
 	@Column(name="image_main")
@@ -95,15 +99,18 @@ public class Product2 {
 	@Column(name="Color")
 	String color;
 	
-	@Column(name="Description", length=1000)
+	@Column(name="Description", length=5000)
 	String description;
 	
-	/*
+	@Column(name="bullet_points",length=1023)
+	String bulletpoints;
+	
+	String keywords;
+	
 	@OneToOne
 	@JsonBackReference
-	@JoinColumn(name="STOCK_ID")*/
-	@Column(name="STOCK_ID")
-	int stock;
+	@JoinColumn(name="STOCK_ID")
+	Stock stock;
 	
 	
 	public String getProductRefId() {
@@ -113,7 +120,6 @@ public class Product2 {
 	public void setProductRefId(String productRefId) {
 		this.id = productRefId;
 	}
-
 
 	public String getTitle() {
 		return title;
@@ -215,22 +221,28 @@ public class Product2 {
 		this.price = price;
 	}
 
-	
-	
-	public int getStock() {
-		return stock;
-	}
-
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-
 	public String getCud() {
 		return cud;
 	}
 
 	public void setCud(String cud) {
 		this.cud = cud;
+	}
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
+	}
+
+	public Stock getStock() {
+		return stock;
+	}
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
 
 	public Date getCreatedDtTime() {
@@ -338,10 +350,29 @@ public class Product2 {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
+
+	public String getBulletpoints() {
+		return bulletpoints;
+	}
+
+	public void setBulletpoints(String bulletpoints) {
+		this.bulletpoints = bulletpoints;
+	}
+	
+	
+
+	public String getStockDetails() {
+		return stockDetails;
+	}
+
+	public void setStockDetails(String stockDetails) {
+		this.stockDetails = stockDetails;
+	}
 
 	@Override
 	public String toString() {
-		return "{\"id\":" + id + ", \"sku\":\"" +"sku_123_Test"+ "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":\"f\""
+		return "{\"id\":" + id + ", \"stock\":\"" +stock+ "\", \"title\":\"" + title + "\", \"quantity\":" + 12 + ", \"is_featured\":\"f\""
 				+ ", \"is_hot\":\"hot\"" + ", \"sale_price\":" + sale_price + ", \"vendor\":\""  + "\", \"depot\":" + 10 + ", \"is_active\":" + is_active + ", \"slug\":\"" + slug + "\", \"images\":" + images + ", \"user\":\"" +userId+ "\", \"price\":" + price
 				+ ", \"material\":\"" + material + "\", \"brand\":\"" + brand + "\", \"color\":\"" + color + "\", \"description\":\"" + description
 				+ "\"}";
